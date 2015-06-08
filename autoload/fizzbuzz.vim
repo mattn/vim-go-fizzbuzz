@@ -11,12 +11,12 @@ import thread
 import time
 from ctypes import *
 
-lib = CDLL(vim.eval('s:libdir') + '/libfizzbuzz.so')
-lib.fizzbuzz.restype = c_char_p
+libfizzbuzz = CDLL(vim.eval('s:libdir') + '/libfizzbuzz.so')
+libfizzbuzz.fizzbuzz.restype = c_char_p
 
 def run():
   while True:
-    vim.eval("fizzbuzz#on_fizzbuzz('%s')" % lib.fizzbuzz())
+    vim.eval("fizzbuzz#on_fizzbuzz('%s')" % libfizzbuzz.fizzbuzz())
     time.sleep(1)
 
 thread.start_new_thread(run, ())
